@@ -196,7 +196,24 @@ public class PointsManager {
         
         if(gifterResponse.wasSuccessful()){
             if(!gifterResponse.getAccount().hasGiftedToday()){
-                return this.givePlayer(giftTo, 1);
+                try(PreparedStatement updateLastGifted = this.con.prepareStatement("UPDATE "+this.TBL_ACCOUNTS+" SET last_gifted = ? WHERE uuid = ? LIMIT 1")){
+                    updateLastGifted.setTimestamp(1, new java.sql.Timestamp(new java.util.Date().getTime()));
+                    updateLastGifted.setString(2, gifter.toString());
+                    
+                    int rows = updateLastGifted.executeUpdate();
+                    
+                    if(rows > 0){ 
+                        return this.givePlayer(giftTo, 1);
+                    }
+                    else {
+                        return new CoolPointsResponse(CoolPointsResponseType.FAILURE,"Unable to verify if you have gifted today!");
+                    }
+                } 
+                catch (SQLException ex) {
+                    Logger.getLogger(PointsManager.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                    return new CoolPointsResponse(CoolPointsResponseType.FAILURE_DATABASE,"Unable to update the database with your gift!");
+                } 
             }
             else{
                 return new CoolPointsResponse(CoolPointsResponseType.FAILURE_ALREADY_GIFTED,"You already gifted someone today!");
