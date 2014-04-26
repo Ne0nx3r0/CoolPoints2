@@ -12,7 +12,7 @@ class CommandTop extends CoolPointsCommand{
     private final PointsManager cp;
 
     public CommandTop(CoolPointsPlugin plugin) {
-        super("balance","[username]","Check how many CP a user has","coolpoints.balance");
+        super("top","[username]","Check how many CP a user has","coolpoints.balance");
         
         this.cp = plugin.getCoolPointsManager();
     }

@@ -176,7 +176,7 @@ public class PointsManager {
             createAccount.setTimestamp(3, now);
             createAccount.setTimestamp(4, now);
             createAccount.setTimestamp(5, now);
-            createAccount.setInt(6, 0);// accounts are created with 1CP
+            createAccount.setInt(6, 1);// accounts are created with 1CP
             
             createAccount.executeUpdate();
             
@@ -237,15 +237,19 @@ public class PointsManager {
     }
 
     public int getPlayerRank(UUID uniqueId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 1;
     }
 
     public int getPlayerRank(String sPlayer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 1;
+    }
+    
+    public int getPlayerRank(int dbID) {
+        return 1;
     }
 
     public Map<String, Integer> getTopPlayers(int topAmount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     public boolean giveDailyWage(UUID uniqueId) {

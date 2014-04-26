@@ -53,6 +53,11 @@ public class CoolPointsCommandExecutor implements CommandExecutor {
                 );
             }
         }
+        else if(args.length == 1){
+            cpCommand = this.subCommands.get("balance");
+            
+            return cpCommand.execute(cs, new String[]{"balance",args[0]});
+        }
         
         return false;
     }
@@ -73,10 +78,14 @@ public class CoolPointsCommandExecutor implements CommandExecutor {
             CoolPointsResponse response = this.cp.getPlayerAccount(player.getUniqueId(), false);
 
             if(response.wasSuccessful()){
+                cs.sendMessage("");
                 cs.sendMessage("You have "+response.getAccount().getBalance()+"CP");
+                cs.sendMessage("");
             }
             else {
+                cs.sendMessage("");
                 cs.sendMessage("You have "+0+"CP :(... BOO!");
+                cs.sendMessage("");
             }
         }
     }

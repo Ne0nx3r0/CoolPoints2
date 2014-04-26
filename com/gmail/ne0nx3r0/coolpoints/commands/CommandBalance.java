@@ -6,6 +6,7 @@ import com.gmail.ne0nx3r0.coolpoints.points.CoolPointsResponse;
 import com.gmail.ne0nx3r0.coolpoints.points.PointsManager;
 import com.ne0nx3r0.util.DateTimeUtil;
 import java.text.SimpleDateFormat;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -27,7 +28,16 @@ class CommandBalance extends CoolPointsCommand{
                 CoolPointsResponse cpr = cp.getPlayerAccount(player.getUniqueId(), false);
                 
                 if(cpr.wasSuccessful()){
-                    this.send(cs,"You have "+cpr.getAccount().getBalance());
+                    CoolPointsAccount cpa = cpr.getAccount();
+
+                    SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMM dd, yyyy");
+                    String date = DATE_FORMAT.format(cpa.getFirstJoined());
+                    
+                    this.send(cs,new String[]{
+                        "You have "+cpa.getBalance()+"CP",
+                        "Ranked "+this.cp.getPlayerRank(cpa.getdbID()),
+                        "Member since "+date+" ("+DateTimeUtil.getTimeSinceString(cpa.getFirstJoined())+")"
+                    });
                 }
                 else {
                     this.send(cs, "You have 0CP, boo!");
@@ -50,8 +60,9 @@ class CommandBalance extends CoolPointsCommand{
                 String date = DATE_FORMAT.format(cpa.getFirstJoined());
                 
                 this.send(cs,new String[]{
-                    cpa.getUsername()+" has "+cpa.getBalance()+"CP",
-                    "Member since "+date+" ("+DateTimeUtil.getTimeSinceString(cpa.getFirstJoined())+")"
+                    cpa.getUsername()+ChatColor.GRAY+" has "+ChatColor.RESET+cpa.getBalance()+"CP",
+                    ChatColor.GRAY+"Ranked "+ChatColor.RESET+this.cp.getPlayerRank(cpa.getdbID()),
+                    ChatColor.GRAY+"Member since "+ChatColor.RESET+date+ChatColor.GRAY+" ("+ChatColor.RESET+DateTimeUtil.getTimeSinceString(cpa.getFirstJoined())+ChatColor.GRAY+")"
                 });
             }
             else {
