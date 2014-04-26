@@ -1,0 +1,21 @@
+name: CoolPoints
+main: com.gmail.ne0nx3r0.coolpoints.CoolPointsPlugin
+version: '2.0a'
+database: false
+description: Basic social points system
+commands:
+  cp: 
+    description: CoolPoints commands
+permissions:
+    coolpoints.balance:
+      description: Allows player to view balance of others
+    coolpoints.earn:
+      description: Allows player to earn daily point
+    coolpoints.gift:
+      description: Allows player to gift their daily point
+    coolpoints.top:
+      description: Allows player to see top ranked players
+    coolpoints.rank:
+      description: Allows player to see ranks of players
+    coolpoints.manage:
+      description: Allows management of cool points (give/take)

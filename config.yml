@@ -1,0 +1,7 @@
+database: 
+    prefix: cp_
+    hostname: localhost
+    port: 3306
+    database: coolpoints
+    username: coolpoints
+    password: coolpoints
