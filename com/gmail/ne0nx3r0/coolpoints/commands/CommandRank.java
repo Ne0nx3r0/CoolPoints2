@@ -20,7 +20,7 @@ class CommandRank extends CoolPointsCommand{
             if(cs instanceof Player){
                 Player player = (Player) cs;
                 
-                int playerRank = cp.getPlayerRank(player.getUniqueId());
+                int playerRank = cp.getPlayerRank(player.getName());
                 
                 this.send(cs,"You are ranked "+playerRank);
             }
