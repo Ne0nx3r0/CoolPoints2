@@ -29,7 +29,7 @@ public class CoolPointsCommand {
     }
 
     public String getUsage() {
-        return "/money "+this.name+" "+this.usageArguments;
+        return "/cp "+this.name+" "+this.usageArguments;
     }
 
     void send(CommandSender cs, String...lines) {
