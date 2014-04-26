@@ -24,7 +24,6 @@ public class CoolPointsCommandExecutor implements CommandExecutor {
         this.registerSubcommand(new CommandGive(plugin));
         this.registerSubcommand(new CommandTake(plugin));
         this.registerSubcommand(new CommandTop(plugin));
-        this.registerSubcommand(new CommandRank(plugin));
         //this.registerSubcommand(new CommandWho(plugin));
         //this.registerSubcommand(new CommandReset(plugin));
         //this.registerSubcommand(new CommandCreateProfileWith(plugin));

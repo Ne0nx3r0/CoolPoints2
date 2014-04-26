@@ -45,15 +45,14 @@ class CommandTop extends CoolPointsCommand{
         
         Iterator<Map.Entry<String, Integer>> iterator = topPlayers.entrySet().iterator();
         
-        
-        messages[0] = ChatColor.GOLD+"    Top "+topAmount+" players";
+        messages[0] = ChatColor.GOLD+"Top "+topAmount+" players";
         
         int i = 1;
         
         while(iterator.hasNext()){
             Entry<String, Integer> entry = iterator.next();
 
-            messages[i+3] = "    #"+(i)+" "+ChatColor.BLUE+entry.getKey() + ChatColor.WHITE+" : " + ChatColor.GREEN+entry.getValue();
+            messages[i] = "#"+(i)+" "+ChatColor.BLUE+entry.getKey() + ChatColor.WHITE+" : " + ChatColor.GREEN+entry.getValue();
             
             i++;
         }
