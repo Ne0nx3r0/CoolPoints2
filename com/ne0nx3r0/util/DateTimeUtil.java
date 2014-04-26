@@ -33,14 +33,14 @@ public class DateTimeUtil {
         different = different % yearsInMilli;
         
         if(elapsedYears > 0) {
-            return elapsedYears+" years ago! An ancient!";
+            return elapsedYears+" years ago!";
         }
 
         long elapsedMonths = different / monthsInMilli;
         different = different % monthsInMilli;
         
         if(elapsedMonths > 0) {
-            return elapsedMonths+" months ago - old school.";
+            return elapsedMonths+" months ago";
         }
         
         long elapsedDays = different / daysInMilli;

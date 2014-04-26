@@ -34,7 +34,7 @@ class CommandBalance extends CoolPointsCommand{
                     String date = DATE_FORMAT.format(cpa.getFirstJoined());
                     
                     this.send(cs,new String[]{
-                        ChatColor.GRAY+"You have "+ChatColor.RESET+cpa.getBalance()+"CP "+ChatColor.GRAY+"(Overall rank: "+ChatColor.GREEN+"#"+this.cp.getPlayerRank(cpa.getUsername()),
+                        ChatColor.GRAY+"You have "+ChatColor.RESET+cpa.getBalance()+"CP "+ChatColor.GRAY+"(Overall rank: "+ChatColor.GREEN+"#"+this.cp.getPlayerRank(cpa.getUsername())+ChatColor.GRAY+")",
                         ChatColor.GRAY+"Member since "+ChatColor.RESET+date+ChatColor.GRAY+" ("+ChatColor.RESET+DateTimeUtil.getTimeSinceString(cpa.getFirstJoined())+ChatColor.GRAY+")"
                     });
                 }
@@ -59,7 +59,7 @@ class CommandBalance extends CoolPointsCommand{
                 String date = DATE_FORMAT.format(cpa.getFirstJoined());
                 
                 this.send(cs,new String[]{
-                    cpa.getUsername()+ChatColor.GRAY+" has "+ChatColor.RESET+cpa.getBalance()+"CP "+ChatColor.GRAY+"(Overall rank: "+ChatColor.GREEN+"#"+this.cp.getPlayerRank(cpa.getUsername()),
+                    cpa.getUsername()+ChatColor.GRAY+" has "+ChatColor.RESET+cpa.getBalance()+"CP "+ChatColor.GRAY+"(Rank: "+ChatColor.GREEN+"#"+this.cp.getPlayerRank(cpa.getUsername())+ChatColor.GRAY+")",
                     ChatColor.GRAY+"Member since "+ChatColor.RESET+date+ChatColor.GRAY+" ("+ChatColor.RESET+DateTimeUtil.getTimeSinceString(cpa.getFirstJoined())+ChatColor.GRAY+")"
                 });
             }
