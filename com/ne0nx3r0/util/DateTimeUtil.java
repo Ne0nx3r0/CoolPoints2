@@ -13,12 +13,12 @@ public class DateTimeUtil {
     }
     
     public static String getTimeSinceString(Date then) {
-        return DateTimeUtil.getTimeSinceString(then, new Date());
+        return DateTimeUtil.getTimeSinceCPString(then, new Date());
     }
     
     // source:
     // http://www.mkyong.com/java/java-time-elapsed-in-days-hours-minutes-seconds/
-    public static String getTimeSinceString(Date then, Date now) {
+    public static String getTimeSinceCPString(Date then, Date now) {
         //milliseconds
         long different = now.getTime() - then.getTime();
 
@@ -26,7 +26,23 @@ public class DateTimeUtil {
         long minutesInMilli = secondsInMilli * 60;
         long hoursInMilli = minutesInMilli * 60;
         long daysInMilli = hoursInMilli * 24;
+        long monthsInMilli = daysInMilli * 30;
+        long yearsInMilli = daysInMilli * 365;
 
+        long elapsedYears = different / yearsInMilli;
+        different = different % yearsInMilli;
+        
+        if(elapsedYears > 0) {
+            return elapsedYears+" years ago! An ancient!";
+        }
+
+        long elapsedMonths = different / monthsInMilli;
+        different = different % monthsInMilli;
+        
+        if(elapsedMonths > 0) {
+            return elapsedMonths+" months ago - old school.";
+        }
+        
         long elapsedDays = different / daysInMilli;
         different = different % daysInMilli;
 
@@ -54,6 +70,6 @@ public class DateTimeUtil {
             return elapsedSeconds+" seconds ago";
         }
         
-        return different+"ms ago";
+        return different+"ms ago - wow you checked this quickly.";
     }
 }
