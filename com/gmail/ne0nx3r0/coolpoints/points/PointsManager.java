@@ -1,6 +1,7 @@
 package com.gmail.ne0nx3r0.coolpoints.points;
 
 import com.gmail.ne0nx3r0.coolpoints.CoolPointsPlugin;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -236,19 +238,56 @@ public class PointsManager {
         }
     }
 
-    public int getPlayerRank(UUID uniqueId) {
-        return 1;
-    }
+    public int getPlayerRank(String playerName) {
+        CoolPointsResponse response = this.getPlayerAccount(playerName, false);
+        
+        if(!response.wasSuccessful()) {
+            return -1;
+        }
 
-    public int getPlayerRank(String sPlayer) {
-        return 1;
-    }
-    
-    public int getPlayerRank(int dbID) {
-        return 1;
+        try(PreparedStatement statement = this.con.prepareStatement("SELECT COUNT(*) as rank FROM "+this.TBL_ACCOUNTS+" WHERE balance > ?"))
+        {
+            statement.setInt(1, response.getAccount().getBalance());
+            
+            try(ResultSet result = statement.executeQuery())
+            {
+                if(result.next())
+                {
+                    int iRank = result.getInt("rank")+1;
+
+                    return iRank;
+                }
+            }
+        }
+        catch (SQLException ex)
+        {
+            this.logger.log(Level.SEVERE, null, ex);
+        }
+        
+        return -1;
     }
 
     public Map<String, Integer> getTopPlayers(int topAmount) {
+        try(PreparedStatement statement = this.con.prepareStatement("SELECT username,balance FROM "+this.TBL_ACCOUNTS+" ORDER BY balance DESC LIMIT ?"))
+        {
+            statement.setInt(1, topAmount);
+            
+            try(ResultSet result = statement.executeQuery()){
+                LinkedHashMap <String,Integer> topPlayers = new LinkedHashMap <>();
+
+                while(result.next())
+                {
+                    topPlayers.put(result.getString("username"),result.getInt("balance"));
+                }
+
+                return topPlayers;
+            }
+        }
+        catch (Exception ex)
+        {
+            this.logger.log(Level.SEVERE, null, ex);
+        }
+        
         return null;
     }
 

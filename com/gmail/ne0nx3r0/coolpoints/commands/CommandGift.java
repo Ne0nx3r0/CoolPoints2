@@ -57,7 +57,7 @@ class CommandGift extends CoolPointsCommand{
                     giftToDisplayName = giftToName;
                 }
                 
-                plugin.getServer().broadcastMessage(gifter.getDisplayName()+ChatColor.RESET+" gifted a CP to "+giftToDisplayName+ChatColor.RESET+"("+giftedPlayer.getBalance()+"CP)!");
+                plugin.getServer().broadcastMessage(gifter.getDisplayName()+ChatColor.RESET+" gifted a CP to "+giftToDisplayName+ChatColor.RESET+" ("+giftedPlayer.getBalance()+"CP)!");
             }
             else {
                 this.sendError(cs, giftedResponse.getMessage());
