@@ -316,7 +316,7 @@ public class PointsManager {
         }
         
         try(PreparedStatement giveDailyWage = this.con.prepareStatement("UPDATE "+this.TBL_ACCOUNTS+" SET balance = balance + 1, last_seen = ? WHERE id = ?")){
-            giveDailyWage.setTimestamp(1, new java.sql.Timestamp(new java.util.Date().getTime()));
+            giveDailyWage.setTimestamp(1, new Timestamp(new java.util.Date().getTime()));
             giveDailyWage.setInt(2, cpr.getAccount().getdbID());
             
             giveDailyWage.executeUpdate();
@@ -328,5 +328,21 @@ public class PointsManager {
         }
             
         return false;
+    }
+
+    public void migrateAccount(UUID uniqueId, String username, int balance, Date firstJoined) {
+        try(PreparedStatement migrateAccount = this.con.prepareStatement("INSERT INTO "+this.TBL_ACCOUNTS+"(uuid,username,first_joined,last_seen,last_gifted,balance) VALUES(?,?,?,?,?,?)")){
+            migrateAccount.setString(1, uniqueId.toString());
+            migrateAccount.setString(2, username);
+            migrateAccount.setTimestamp(3, new Timestamp(firstJoined.getTime()));
+            migrateAccount.setTimestamp(4, new Timestamp(firstJoined.getTime()));
+            migrateAccount.setTimestamp(5, new Timestamp(firstJoined.getTime()));
+            migrateAccount.setInt(6, balance);
+            
+            migrateAccount.executeUpdate();
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(PointsManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

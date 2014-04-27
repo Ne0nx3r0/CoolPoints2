@@ -69,6 +69,10 @@ class CommandBalance extends CoolPointsCommand{
         }
         
         return true;
-        
+    }
+    
+    @Override
+    public String getUsage() {
+        return "/cp [username]";
     }
 }

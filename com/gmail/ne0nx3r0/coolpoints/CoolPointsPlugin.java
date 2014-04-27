@@ -3,6 +3,7 @@ package com.gmail.ne0nx3r0.coolpoints;
 import com.gmail.ne0nx3r0.coolpoints.listeners.CoolPointsPlayerListener;
 import com.gmail.ne0nx3r0.coolpoints.commands.CoolPointsCommandExecutor;
 import com.gmail.ne0nx3r0.coolpoints.points.PointsManager;
+import com.ne0nx3r0.coolpoints.migration.Migrator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CoolPointsPlugin extends JavaPlugin{
@@ -15,6 +16,12 @@ public class CoolPointsPlugin extends JavaPlugin{
         this.getCommand("cp").setExecutor(new CoolPointsCommandExecutor(this));
         
         this.getServer().getPluginManager().registerEvents(new CoolPointsPlayerListener(this), this);
+        
+        if(this.getConfig().getBoolean("migrate_accounts")){
+            Migrator m = new Migrator(this);
+            
+            m.migrate();
+        }
     }
     
     public PointsManager getCoolPointsManager(){
