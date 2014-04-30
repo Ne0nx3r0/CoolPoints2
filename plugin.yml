@@ -1,6 +1,6 @@
 name: CoolPoints
 main: com.gmail.ne0nx3r0.coolpoints.CoolPointsPlugin
-version: '2.0a'
+version: '2.0.1a'
 database: false
 description: Basic social points system
 commands:
