@@ -1,7 +1,6 @@
 package com.gmail.ne0nx3r0.coolpoints.points;
 
 import com.gmail.ne0nx3r0.coolpoints.CoolPointsPlugin;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -315,9 +314,8 @@ public class PointsManager {
             return false;
         }
         
-        try(PreparedStatement giveDailyWage = this.con.prepareStatement("UPDATE "+this.TBL_ACCOUNTS+" SET balance = balance + 1, last_seen = ? WHERE id = ?")){
-            giveDailyWage.setTimestamp(1, new Timestamp(new java.util.Date().getTime()));
-            giveDailyWage.setInt(2, cpr.getAccount().getdbID());
+        try(PreparedStatement giveDailyWage = this.con.prepareStatement("UPDATE "+this.TBL_ACCOUNTS+" SET balance = balance + 1, last_seen = NOW() WHERE id = ?")){
+            giveDailyWage.setInt(1, cpr.getAccount().getdbID());
             
             giveDailyWage.executeUpdate();
 
